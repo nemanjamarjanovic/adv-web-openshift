@@ -1,0 +1,123 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Pregled podataka sa senzora</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="myDiv">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <img class="img-icon" alt="" src="resources/images/temperature.png">
+                    Temperatura:
+                </div>
+                <div class="panel-body">
+                    <div class="text-center"><h1>{{lastDeviceState.temperature}} °C</h1></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <img class="img-icon"  alt="" src="resources/images/humidity.png">
+                    Vlažnost vazduha:
+                </div>
+                <div class="panel-body">
+                    <div class="text-center"><h1>{{lastDeviceState.humidity}} %</h1></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">Status uređaja:</div>
+                <div class="panel-body">
+                    <div class="text-center">Vrijeme posljednjeg očitavanja:</div>
+                    <div class="text-center"><b>{{lastDeviceState.createTime| date :'HH:mm dd.MM.yyyy.'}}</b></div>
+
+                    <div class="text-center">
+                        <h4>
+                            <span class="label label-success" ng-show="lastDeviceState.device.active">aktivan</span>
+                            <span class="label label-danger" ng-show="!lastDeviceState.device.active">neaktivan</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <a href="#/chart/temperature">Temperatura</a>
+                </div>
+                <div class="panel-body">
+                    <highchart id="tchart" config="tchartConfig"></highchart>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <a href="#/chart/humidity">Vlažnost</a>
+                </div>
+                <div class="panel-body">
+                    <highchart id="hchart1" config="hchartConfig"></highchart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Vlasnik</div>
+                <div class="panel-body">
+                    <h4>{{customer.name}}</h4>
+                    <p>{{customer.location}}</p>
+                    <span class="label label-success" ng-show="customer.active">aktivan</span>
+                    <span class="label label-danger" ng-show="!customer.active">neaktivan</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Uredjaj</div>
+                <div class="panel-body">
+                    <h4>{{device.serialNumber}}</h4>
+                    <p>{{device.location}}</p>
+                    <span class="label label-success" ng-show="device.active">aktivan</span>
+                    <span class="label label-danger" ng-show="!device.active">neaktivan</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Mod rada </div>
+                <div class="panel-body">
+                    <h4 >{{lastDeviceState.workingMode.title}}</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="pull-right text-right">
+                                <p>Temperatura:</p> 
+                                <p> Vlažnost vazduha:</p> 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{lastDeviceState.workingMode.minTemperature}} -  {{lastDeviceState.workingMode.maxTemperature}}</p> 
+                            <p>{{lastDeviceState.workingMode.minHumidity}} - {{lastDeviceState.workingMode.maxHumidity}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
